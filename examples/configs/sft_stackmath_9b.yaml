@@ -1,0 +1,116 @@
+# SFT Configuration for stackmath-translation-jaen-llmjp dataset
+# Model: ft-llm-team-mkj/baseline-model-instruct-8k-yarn (9B)
+
+sft:
+  max_num_epochs: 1
+  max_num_steps: 999999  # Large number to train for full epoch
+
+  val_period: 100
+  val_batches: 16
+  val_global_batch_size: 32
+  val_micro_batch_size: 1
+  val_at_start: true
+  seed: 42
+
+checkpointing:
+  enabled: true
+  checkpoint_dir: "results/sft_stackmath_9b"
+  metric_name: "val:val_loss"
+  higher_is_better: false
+  keep_top_k: 3
+  save_period: 1000
+  checkpoint_must_save_by: null
+
+policy:
+  model_name: "ft-llm-team-mkj/baseline-model-instruct-8k-yarn"
+  tokenizer:
+    name: ${policy.model_name}
+    chat_template: "default"  # Use model's default chat template
+    chat_template_kwargs: null
+  train_global_batch_size: 32
+  train_micro_batch_size: 1
+  max_total_sequence_length: 8192  # 8k context length
+  precision: "bfloat16"
+
+  offload_optimizer_for_logprob: false
+
+  dtensor_cfg:
+    _v2: false
+    enabled: true
+    env_vars: {}
+    cpu_offload: false
+    sequence_parallel: false  # Disabled: broken with tp_size>1 in torch 2.8/2.9
+    activation_checkpointing: true  # Enable for 9B model to save memory
+    tensor_parallel_size: 8  # Use all 8 GPUs for tensor parallelism
+    context_parallel_size: 1
+    custom_parallel_plan: null
+
+    lora_cfg:
+      enabled: false
+
+  dynamic_batching:
+    enabled: false
+    train_mb_tokens: ${mul:${policy.max_total_sequence_length}, ${policy.train_micro_batch_size}}
+    sequence_length_round: 64
+
+  sequence_packing:
+    enabled: true  # Enable for better throughput
+    train_mb_tokens: ${mul:${policy.max_total_sequence_length}, ${policy.train_micro_batch_size}}
+    algorithm: "modified_first_fit_decreasing"
+    sequence_length_round: 64
+
+  make_sequence_length_divisible_by: ${policy.dtensor_cfg.tensor_parallel_size}
+  max_grad_norm: 1.0
+
+  optimizer:
+    name: "torch.optim.AdamW"
+    kwargs:
+      lr: 2.0e-5
+      weight_decay: 0.1
+      betas: [0.9, 0.98]
+      eps: 1e-5
+      foreach: false
+      fused: false
+
+  megatron_cfg:
+    enabled: false
+    env_vars: {}
+
+data:
+  max_input_seq_length: ${policy.max_total_sequence_length}
+  add_bos: true
+  add_eos: true
+  add_generation_prompt: false
+  shuffle: true
+  num_workers: 4
+
+  # OpenAI format dataset configuration (local JSONL files)
+  dataset_name: "openai_format"
+  train_data_path: "data/stackmath/train.jsonl"
+  val_data_path: "data/stackmath/test.jsonl"
+  chat_key: "messages"
+  system_key: null
+  system_prompt: null
+  tool_key: null
+  use_preserving_dataset: false
+
+logger:
+  log_dir: "logs"
+  wandb_enabled: true
+  tensorboard_enabled: true
+  mlflow_enabled: false
+  swanlab_enabled: false
+  monitor_gpus: true
+  wandb:
+    entity: "llm-jp-competition"
+    project: "sft-stackmath"
+    name: "sft-stackmath-9b"
+  tensorboard:
+    log_dir: "tb_logs-sft-stackmath-9b"
+  gpu_monitoring:
+    collection_interval: 10
+    flush_interval: 10
+
+cluster:
+  gpus_per_node: 8
+  num_nodes: 1
