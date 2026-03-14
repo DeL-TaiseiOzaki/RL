@@ -35,6 +35,7 @@ from nemo_rl.distributed.ray_actor_environment_registry import (
 )
 from nemo_rl.distributed.virtual_cluster import init_ray
 from nemo_rl.environments.interfaces import EnvironmentInterface
+from nemo_rl.environments.llm_judge_math_environment import LLMJudgeMathEnvironment
 from nemo_rl.environments.math_environment import MathEnvironment
 from nemo_rl.models.generation import configure_generation_config
 from nemo_rl.utils.config import load_config, parse_hydra_overrides
@@ -93,14 +94,28 @@ def setup_data(
     task_data_processors[task_name] = (math_task_spec, math_hf_data_processor)
 
     # setup math environment
-    math_env = MathEnvironment.options(  # type: ignore # it's wrapped with ray.remote
-        runtime_env={
-            "py_executable": get_actor_python_env(
-                "nemo_rl.environments.math_environment.MathEnvironment"
-            ),
-            "env_vars": dict(os.environ),  # Pass thru all user environment variables
-        }
-    ).remote(env_configs["math"])
+    llm_judge_cfg = env_configs["math"].get("llm_judge", {})
+    use_llm_judge = llm_judge_cfg.get("enabled", False)
+
+    if use_llm_judge:
+        print("  ✓ Using LLMJudgeMathEnvironment (binary + LLM partial credit)")
+        math_env = LLMJudgeMathEnvironment.options(  # type: ignore
+            runtime_env={
+                "py_executable": get_actor_python_env(
+                    "nemo_rl.environments.math_environment.MathEnvironment"
+                ),
+                "env_vars": dict(os.environ),
+            }
+        ).remote(env_configs["math"])
+    else:
+        math_env = MathEnvironment.options(  # type: ignore # it's wrapped with ray.remote
+            runtime_env={
+                "py_executable": get_actor_python_env(
+                    "nemo_rl.environments.math_environment.MathEnvironment"
+                ),
+                "env_vars": dict(os.environ),  # Pass thru all user environment variables
+            }
+        ).remote(env_configs["math"])
 
     dataset = AllTaskProcessedDataset(
         data.formatted_ds["train"],
@@ -127,8 +142,22 @@ def setup_data(
     return dataset, val_dataset, task_to_env, task_to_env
 
 
+def _load_dotenv() -> None:
+    """Load .env file if it exists."""
+    env_path = os.path.join(os.getcwd(), ".env")
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, _, value = line.partition("=")
+                    os.environ.setdefault(key.strip(), value.strip())
+
+
 def main() -> None:
     """Main entry point."""
+    _load_dotenv()
+
     # Parse arguments
     args, overrides = parse_args()
 

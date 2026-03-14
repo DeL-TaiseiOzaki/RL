@@ -1,0 +1,180 @@
+{"problem": "Find the following limit: $\\displaystyle \\lim_{x\\to\\infty}\\frac{\\log x}{x^{1/3}}$", "solution": "$0$"}
+{"problem": "One apple costs $a$ yen and one orange costs $b$ yen. Two apples and three oranges together cost $210$ yen. Also, three apples and two oranges together cost $190$ yen. Find $a$ and $b$.", "solution": "30, 50"}
+{"problem": "When throwing two dice (large and small) simultaneously, find the probability that the product of the numbers shown is even.", "solution": "$\\frac{3}{4}$"}
+{"problem": "The line $y = ax + 6$ is perpendicular to the line $2x - 3y + 4 = 0$. Find the value of $a$.", "solution": "$-\\frac{3}{2}$"}
+{"problem": "Solve the following equation.\n\n$5x - 8 = 3x + 6$", "solution": "$x = 7$"}
+{"problem": "When three dice are thrown simultaneously, what is the probability that the product of the numbers shown is a multiple of 5?", "solution": "$\\frac{91}{216}$"}
+{"problem": "$(3x - 2y)^{3}$", "solution": "$27x^{3} - 54x^{2}y + 36xy^{2} - 8y^{3}$"}
+{"problem": "For the function $y = 2x^2$, when the value of $x$ increases from 1 to 4, find the increase in $y$.", "solution": "$30$"}
+{"problem": "Differentiate $f(x) = e^{2x}$.", "solution": "$f'(x) = 2e^{2x}$"}
+{"problem": "Find the coordinates of the intersection point of the line $2x + 3y = 12$ and the line $4x - 5y = 8$.", "solution": "$\\left(\\frac{42}{11}, \\frac{16}{11}\\right)$"}
+{"problem": "When buying $x$ chocolates at $a$ yen each and putting them in a bag that costs $b$ yen, the total cost is $y$ yen. When $x = 3$, $y = 210$, and when $x = 7$, $y = 530$. Find the value of $a$.", "solution": "80"}
+{"problem": "Find the limit $\\lim_{n\\to\\infty}a_n$ of the sequence $a_n=\\left(1+\\frac{2}{n}\\right)^n$.", "solution": "$e^{2}$"}
+{"problem": "Find the equation of the tangent line to the curve $y = x^2 - 4x + 3$ at the point $(1, 0)$.", "solution": "$y = -2x + 2$"}
+{"problem": "In how many ways can $7$ people be arranged in a line?", "solution": "$5040$"}
+{"problem": "When a random variable $X$ takes values $1, 2, 3$ with probabilities $\\frac{1}{6}, \\frac{1}{2}, \\frac{1}{3}$ respectively, find $E(X)$.", "solution": "$\\frac{13}{6}$"}
+{"problem": "Differentiate the following function: $f(x)=\\cos\\frac{2}{x}$", "solution": "$f'(x)=\\frac{2}{x^{2}}\\sin\\frac{2}{x}$"}
+{"problem": "A party has a support rate of $0.2$ in a certain region. When 50 people are randomly selected, let $R$ be the proportion of supporters. Find $\\sigma(R)$.", "solution": "$\\sqrt{\\frac{0.2\\cdot 0.8}{50}}=\\sqrt{0.0032}\\approx 0.0566$"}
+{"problem": "When $x = 3$, $y = -27$", "solution": "$y = -3x^{2}$"}
+{"problem": "When buying 5 pencils at $a$ yen each and 3 notebooks at $b$ yen each, express the total cost using an algebraic expression.", "solution": "$(5a + 3b)$ yen"}
+{"problem": "Express $120$ as a product of prime factors.", "solution": "$2^3 \\times 3 \\times 5$"}
+{"problem": "For $0 \\leq x \\leq 4$, find the minimum value of the function $y = x^2 - 2x - 3$.", "solution": "$-4$"}
+{"problem": "Factorize the following expression. $x^2 - 9x + 20$", "solution": "$(x - 4)(x - 5)$"}
+{"problem": "Solve the following system of equations.\n\n$\\begin{cases} 2x + 3y = 13 \\\\ 5x - 2y = 4 \\end{cases}$", "solution": "$x = 2, y = 3$"}
+{"problem": "Solve the following equation: $\\frac{3}{4}x + 5 = 2x - 7$", "solution": "$\\frac{48}{5}$"}
+{"problem": "$$\\sqrt{54}$$", "solution": "$3\\sqrt{6}$"}
+{"problem": "When drawing 2 balls simultaneously from a bag containing 3 red balls and 2 white balls, find the probability that both balls are red.", "solution": "$\\frac{3}{10}$"}
+{"problem": "When the intersection point of the following two lines lies on the line $y = x$, find the value of $a$: $y = 3x + a$, $2x - y = 5$", "solution": "-10"}
+{"problem": "Expand the following expression. $(2x - 5)^2$", "solution": "$4x^2 - 20x + 25$"}
+{"problem": "Find the greatest common divisor of $84$ and $56$.", "solution": "$28$"}
+{"problem": "Calculate the following. $\\sqrt{50} + \\sqrt{8}$", "solution": "$7\\sqrt{2}$"}
+{"problem": "Calculate the following.\n\n$-5 + 8 - (-3) + (-7)$", "solution": "$-1$"}
+{"problem": "Find the equation of the line passing through points $(3, -2)$ and $(7, 4)$.", "solution": "$y = \\frac{3}{2}x - \\frac{13}{2}$"}
+{"problem": "$$x - y = 2$$", "solution": "$y = 3$"}
+{"problem": "In how many ways can $3$ committee members be selected from $10$ people?", "solution": "$120$"}
+{"problem": "Find the equation of the line passing through the two points $(2, 5)$ and $(6, 13)$.", "solution": "$y = 2x + 1$"}
+{"problem": "For the function $y = \\frac{1}{3}x^2$, find the average rate of change when $x$ increases from 3 to 6.", "solution": "$3$"}
+{"problem": "Find the coefficient of $x^3$ in the expansion of $(x + 1)^5$.", "solution": "$10$"}
+{"problem": "If $\\log_{2}5=a,\\ \\log_{5}7=b$, express $\\log_{14}20$ in terms of $a,b$.", "solution": "$\\frac{a+2}{1+ab}$"}
+{"problem": "Find $\\int_0^2 (x^2 + 1) dx$.", "solution": "$\\frac{14}{3}$"}
+{"problem": "Solve the following equation. $x^2 + 4x - 21 = 0$", "solution": "$x = -7, 3$"}
+{"problem": "Solve the following equation.\n\n$0.3x + 1.2 = 0.5x - 0.4$", "solution": "$x = 8$"}
+{"problem": "When the graph of the linear function $y = -2x + 5$ passes through the point $(a, -3)$, find the value of $a$.", "solution": "$4$"}
+{"problem": "Find the derivative of the function $f(x)=-3x^{2}+5x+7$ at $x=a$.", "solution": "$-6a+5$"}
+{"problem": "The quadratic function $y = f(x)$ attains its maximum value of 8 at $x = 2$, and its graph cuts off a line segment of length 4 from the $x$-axis. Find the equation of this function.", "solution": "$y = -2(x - 2)^{2} + 8$"}
+{"problem": "$$(x - 4)^{2} = 18$$", "solution": "$4 \\pm 3\\sqrt{2}$"}
+{"problem": "$$5x^{2} + 3x - 7 = 0$$", "solution": "$\\frac{-3 \\pm \\sqrt{149}}{10}$"}
+{"problem": "$y$ is inversely proportional to $x$, and when $x = 4$, $y = -6$. Find the value of $y$ when $x = -8$.", "solution": "$y = 3$"}
+{"problem": "$$\\sqrt{72} - \\sqrt{32}$$", "solution": "$2\\sqrt{2}$"}
+{"problem": "Solve the following equation: $\\frac{5}{8}x + 3 = \\frac{2x}{3} - 1$", "solution": "96"}
+{"problem": "Find the sum of all positive divisors of the natural number 72.", "solution": "$195$"}
+{"problem": "$\\cos \\frac{13}{3}\\pi$", "solution": "$\\frac{1}{2}$"}
+{"problem": "Differentiate $f(x) = \\sin 3x$.", "solution": "$f'(x) = 3\\cos 3x$"}
+{"problem": "Solve the following system of equations.\n\n$\\begin{cases} 3x + 4y = 18 \\\\ 2x + 4y = 14 \\end{cases}$", "solution": "$x = 4, y = \\frac{3}{2}$"}
+{"problem": "Solve the following equation. $2x^2 - 5x - 3 = 0$", "solution": "$x = -\\frac{1}{2}, 3$"}
+{"problem": "Find the $5$th term of a geometric sequence with first term $2$ and common ratio $3$.", "solution": "$162$"}
+{"problem": "Let the number of elements in the universal set $U$ be 50, and for subsets $A, B$, let $n(A)=30, n(B)=25$. Find the minimum value that $n(A \\cup B)$ can take.", "solution": "$30$"}
+{"problem": "Solve the following equation. $x^2 - 7x + 12 = 0$", "solution": "$x = 3, 4$"}
+{"problem": "$$(x + 7)^{2}$$", "solution": "$x^{2} + 14x + 49$"}
+{"problem": "Solve the equation $\\log_2 x + \\log_2 (x - 2) = 3$.", "solution": "$x = 4$"}
+{"problem": "When rolling 3 dice simultaneously, find the probability that the sum of the numbers shown is 10.", "solution": "$\\frac{1}{8}$"}
+{"problem": "Find the point obtained by rotating the complex number $z=2-i$ counterclockwise by $\\frac{\\pi}{4}$ about the origin.", "solution": "$\\frac{3\\sqrt2}{2}+\\frac{\\sqrt2}{2}i$"}
+{"problem": "For $y = \\frac{1}{2}x^{2}$, when the value of $x$ increases from 2 to 6, find how many times the increase in $y$ is compared to the increase in $x$.", "solution": "$4$"}
+{"problem": "When drawing 2 balls simultaneously from a bag containing 3 red balls and 2 white balls, find the probability that both balls are red.", "solution": "$\\frac{3}{10}$"}
+{"problem": "When drawing 2 cards consecutively from 5 cards numbered 1 to 5, find the probability that the sum of the two numbers is even.", "solution": "$\\frac{2}{5}$"}
+{"problem": "When rolling a die $3$ times, find the probability that the sum of the numbers is $9$.", "solution": "$\\frac{25}{216}$"}
+{"problem": "Solve $|x - 3| < 5$.", "solution": "$-2 < x < 8$"}
+{"problem": "When the slope of the line connecting two points $(1,4)$ and $(5,x)$ is $3$, find the value of $x$.", "solution": "16"}
+{"problem": "When $\\frac{x}{2} = \\frac{y}{3} = \\frac{z}{4} \\neq 0$, find the value of $\\frac{x^{2} + y^{2} + z^{2}}{xy + yz + zx}$.", "solution": "$\\frac{29}{26}$"}
+{"problem": "Simplify the following expression.\n\n$4(2a - 3b) - 3(a - 5b)$", "solution": "$5a + 3b$"}
+{"problem": "When rolling 3 dice simultaneously, find the probability that the sum of the numbers shown is $15$.", "solution": "$\\frac{5}{108}$"}
+{"problem": "When the graph of the linear function $y = 3x + b$ passes through the point $(-2, 7)$, find the value of $b$.", "solution": "$13$"}
+{"problem": "Express the standardized random variable $Z$ in terms of $X$, where $X$ follows a normal distribution $N(50, 10^2)$.", "solution": "$Z = \\frac{X - 50}{10}$"}
+{"problem": "Find the magnitude $|\\vec{a}|$ of $\\vec{a} = (3, 4)$.", "solution": "$5$"}
+{"problem": "In how many ways can 9 different books be divided into three groups of 4 books, 3 books, and 2 books?", "solution": "$1260$"}
+{"problem": "The sum of two integers is $100$, and one number is $5$ greater than $4$ times the other number. Find the larger of the two integers.", "solution": "$81$"}
+{"problem": "$\\sum_{k=1}^{n} (3k - 2)$", "solution": "$\\frac{1}{2}n(3n - 1)$"}
+{"problem": "Solve the inequality $\\log_{2}(x+1)\\ge 2+\\log_{\\frac12}(x-3)$.", "solution": "$x\\ge 1+2\\sqrt2$"}
+{"problem": "Find the coordinates of the point obtained by rotating the point $P(1, \\sqrt{3})$ about the origin by $\\frac{\\pi}{4}$.", "solution": "$\\left( \\frac{1-\\sqrt{3}}{\\sqrt{2}}, \\frac{1+\\sqrt{3}}{\\sqrt{2}} \\right)$"}
+{"problem": "When the line $y = mx + b$ passes through points $(2,5)$ and $(5,-1)$, find the equation of this line.", "solution": "y = -2x + 9"}
+{"problem": "Find the value of $\\sin 150°$.", "solution": "$\\frac{1}{2}$"}
+{"problem": "$y$ is proportional to the square of $x$, and when $x = 2$, $y = 8$. Express $y$ in terms of $x$.", "solution": "$y = 2x^2$"}
+{"problem": "$$\\sqrt{5}\\left( 3 - \\sqrt{10} \\right)$$", "solution": "$3\\sqrt{5} - 5\\sqrt{2}$"}
+{"problem": "The ratio of two natural numbers is $2:3$, and their least common multiple is 42. Find the sum of these two natural numbers.", "solution": "$35$"}
+{"problem": "When drawing one card from 9 cards numbered 1 to 9, find the probability of getting a multiple of 3.", "solution": "$\\frac{1}{3}$"}
+{"problem": "Find the derivative $f'(x)$ of $f(x)=x^{m-2}$ (where $m$ is a natural number).", "solution": "$f'(x)=(m-2)x^{m-3}$"}
+{"problem": "Find the general term of the sequence defined by the recurrence relation $a_{n+1} = 2a_n + 1$, $a_1 = 1$.", "solution": "$a_n = 2^n - 1$"}
+{"problem": "Find the least common multiple of $18$ and $24$.", "solution": "$72$"}
+{"problem": "$$3x^{2} - 21x + 30$$", "solution": "$3(x - 2)(x - 5)$"}
+{"problem": "When rolling two dice (one large and one small) simultaneously, find the probability that the product of the numbers shown is odd.", "solution": "$\\frac{1}{4}$"}
+{"problem": "Consider the recurrence relation $f_n(x)=\\int\\bigl(f_{n-1}(x)-f_{n-2}(x)\\bigr),dx$. The integration constant is chosen such that $\\int_{0}^{2\\pi}f_n(x),dx=0$. If $f_0(x)=0,\\ f_1(x)=\\cos x$, find $f_3(x)$.", "solution": "$f_3(x)=-\\sin x-\\cos x$"}
+{"problem": "5 pencils and 3 notebooks cost 750 yen, while 3 pencils and 2 notebooks cost 470 yen. Find the price of one pencil.", "solution": "$60$ yen"}
+{"problem": "In $\\triangle ABC$, if $a = 10, A = 30^{\\circ}$, find the radius $R$ of the circumscribed circle of this triangle.", "solution": "$10$"}
+{"problem": "When $\\log_3 5 = a$, express $\\log_3 45$ in terms of $a$.", "solution": "$2 + a$"}
+{"problem": "For $0 \\leq \\theta < 2\\pi$, find all values of $\\theta$ that satisfy $\\sin \\theta = \\frac{\\sqrt{3}}{2}$.", "solution": "$\\theta = \\frac{\\pi}{3}, \\frac{2\\pi}{3}$"}
+{"problem": "For $0 \\leqq \\theta < 2\\pi$, solve the inequality $2\\cos\\theta < -\\sqrt{2}$.", "solution": "$\\frac{3}{4}\\pi < \\theta < \\frac{5}{4}\\pi$"}
+{"problem": "Factor $x^3 - 8$.", "solution": "$(x - 2)(x^2 + 2x + 4)$"}
+{"problem": "Calculate the following. $\\frac{\\sqrt{48}}{\\sqrt{3}}$", "solution": "$4$"}
+{"problem": "$$2x^{2} - 5x - 3 = 0$$", "solution": "$x = 3, -\\frac{1}{2}$"}
+{"problem": "When the identity $\\frac{2x + 1}{(x - 1)(x + 2)} = \\frac{a}{x - 1} + \\frac{b}{x + 2}$ holds, find the values of $a$ and $b$.", "solution": "$a = 1, b = 1$"}
+{"problem": "The sum of two numbers is 30. One number is 5 less than 4 times the other number. Find each number.", "solution": "23 and 7"}
+{"problem": "Calculate $(\\sqrt{5} + 2)(\\sqrt{5} - 2)$.", "solution": "$1$"}
+{"problem": "Find the absolute value $|z|$ of the complex number $z = 3 + 4i$.", "solution": "$5$"}
+{"problem": "When the graph of the function $y = ax^2$ passes through the point $(3, -18)$, find the value of $a$.", "solution": "$a = -2$"}
+{"problem": "Find the equation of the tangent line to the curve $y = x^{2} - 3x$ at the point $(4, 4)$.", "solution": "$y = 5x - 16$"}
+{"problem": "$$(4x + 7y)^{2}$$", "solution": "$16x^{2} + 56xy + 49y^{2}$"}
+{"problem": "Let $n$ be a positive integer. Find the following definite integral: $\\displaystyle \\int_{0}^{\\pi} x\\sin(nx),dx$", "solution": "$\\frac{\\pi}{n}(-1)^{n+1}$"}
+{"problem": "When two vectors $\\vec a=(p,2q)$ and $\\vec b=(3r,x)$ are orthogonal, express $x$ in terms of $p,q,r$ (where $q\\ne 0$).", "solution": "$x=-\\frac{3pr}{2q}$"}
+{"problem": "When rolling a die 3 times, find the probability that the sum of the numbers is 14.", "solution": "$\\frac{5}{72}$"}
+{"problem": "Find the value of $a$ so that the line $y=2x+5$ and the line $y=ax-7$ are perpendicular.", "solution": "$-\\frac{1}{2}$"}
+{"problem": "When $z = x(y - 2) + 3$ varies while satisfying certain conditions greater than $0$, find the maximum value of $z$.", "solution": "$7$"}
+{"problem": "When selecting 2 cards from 5 cards numbered 1 to 5 to form a two-digit integer, find the probability that the integer is a multiple of 3.", "solution": "$\\frac{2}{5}$"}
+{"problem": "Factorize the following expression. $x^2 - 16$", "solution": "$(x + 4)(x - 4)$"}
+{"problem": "When rolling a die 3 times, find the probability that at least one of the rolls shows a 5.", "solution": "$\\frac{91}{216}$"}
+{"problem": "$$\\left( 2\\sqrt{3} + 1 \\right)\\left( \\sqrt{3} - 2 \\right)$$", "solution": "$4 - 3\\sqrt{3}$"}
+{"problem": "For certain numbers $x$ and $y$, when $x + y = 15$ and $x - y = 3$, find $x$ and $y$.", "solution": "$x = 9, y = 6$"}
+{"problem": "For a probability density function $f(x)=a(x-1)^2$ on $1\\le x\\le 3$, find $a$.", "solution": "$\\frac{3}{8}$"}
+{"problem": "For the function $f(x) = x^{2} - 6x + 5$ on the interval $-1 \\leqq x \\leqq 5$, the maximum value is $12$ and the minimum value is $k$. Find the value of the constant $k$.", "solution": "$-4$"}
+{"problem": "The price of one pen is $10$ yen higher than the price of one notebook. When buying 2 pens and 3 notebooks (5 items total), the total cost was $420$ yen. Find the price of one pen.", "solution": "90"}
+{"problem": "When rolling a die $3$ times, find the probability that the sum of the numbers is $12$.", "solution": "$\\frac{25}{216}$"}
+{"problem": "$(x - 2y)^{2}(x + 2y)^{2}$", "solution": "$x^{4} - 8x^{2}y^{2} + 16y^{4}$"}
+{"problem": "Rationalize the denominator of $\\frac{1}{\\sqrt{5} - 2}$.", "solution": "$\\sqrt{5} + 2$"}
+{"problem": "Solve the following equation. $x^2 - 6x + 2 = 0$", "solution": "$x = 3 \\pm \\sqrt{7}$"}
+{"problem": "Solve the following system of equations.\n\n$\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 5 \\\\ x - y = 3 \\end{cases}$", "solution": "$x = 9, y = 6$"}
+{"problem": "When 4 people play rock-paper-scissors once, find the probability that exactly one person wins.", "solution": "$\\frac{4}{27}$"}
+{"problem": "Around a pond, an older brother walks at 80 m per minute and a younger brother walks at 60 m per minute, both starting from the same location at the same time in opposite directions. They meet after 12 minutes. Find the distance around the pond in meters.", "solution": "$1680$"}
+{"problem": "For $a>0,\\ a^{\\frac12}+a^{-\\frac12}=5$, find the value of $a^{\\frac32}+a^{-\\frac32}$.", "solution": "$110$"}
+{"problem": "Last year, a certain junior high school had 480 students in total, boys and girls combined. This year, compared to last year, the number of boys increased by 5% and the number of girls decreased by 10%, resulting in a total decrease of 6 students. Find the number of boys last year.", "solution": "$280$ students"}
+{"problem": "Find the coordinates of the vertex of the function $y = x^2 - 4x + 3$.", "solution": "$(2, -1)$"}
+{"problem": "When the intersection point of the following two lines coincides with the coordinate $(4,-2)$, find the value of $a$: $3x-2y=a$, $5x+y=18$", "solution": "16"}
+{"problem": "Find the $n$-th term $a_n$ of the sequence whose sum from the first term to the $n$-th term is $S_n=n^2+n$.", "solution": "$a_n=2n$"}
+{"problem": "Find $\\lim_{n \\to \\infty} \\frac{2n + 1}{3n - 2}$.", "solution": "$\\frac{2}{3}$"}
+{"problem": "A bag contains 4 red balls, 3 blue balls, and 2 white balls. When drawing one ball from this bag, find the probability of getting a red ball or a white ball.", "solution": "$\\frac{2}{3}$"}
+{"problem": "If $\\frac{\\pi}{2} < \\alpha < \\pi, 0 < \\beta < \\frac{\\pi}{2}$, and $\\sin\\alpha = \\frac{3}{5}, \\cos\\beta = \\frac{5}{13}$, find the value of $\\sin(\\alpha + \\beta)$.", "solution": "$-\\frac{33}{65}$"}
+{"problem": "For polynomials $P = x^{2} - 3x + 1$ and $Q = 2x^{2} + 4$, compute $3P - 2Q$.", "solution": "$-x^{2} - 9x - 5$"}
+{"problem": "Find $\\int e^x dx$.", "solution": "$e^x + C$"}
+{"problem": "$x^{4} - 13x^{2} + 36$", "solution": "$(x + 2)(x - 2)(x + 3)(x - 3)$"}
+{"problem": "For the linear function $y = \\frac{1}{2}x - 3$, when the domain of $x$ is $-4 \\leq x \\leq 6$, find the range of $y$.", "solution": "$-5 \\leq y \\leq 0$"}
+{"problem": "When throwing two dice (large and small), find the probability that the sum of the numbers shown is 7.", "solution": "$\\frac{1}{6}$"}
+{"problem": "When rolling a die $2$ times, find the probability that the sum of the numbers is $8$ or greater.", "solution": "$\\frac{5}{12}$"}
+{"problem": "When drawing $3$ balls from a bag containing $4$ red balls and $3$ white balls, find the probability that exactly $2$ are red and $1$ is white.", "solution": "$\\frac{18}{35}$"}
+{"problem": "Solve the inequality $3x - 7 > 5x + 1$.", "solution": "$x < -4$"}
+{"problem": "$$5x - 2y = 4$$", "solution": "$x = -6$"}
+{"problem": "Differentiate $f(x) = x^3 - 6x^2 + 9x$.", "solution": "$f'(x) = 3x^2 - 12x + 9$"}
+{"problem": "When buying 3 apples and 5 tangerines, it costs 650 yen. When buying 2 apples and 3 tangerines, it costs 400 yen. Find the price of one apple.", "solution": "$100$ yen"}
+{"problem": "Find the coordinates of the intersection point of the lines $y = 2x - 1$ and $y = -x + 8$.", "solution": "$(3, 5)$"}
+{"problem": "Find the $10$th term of an arithmetic sequence with first term $3$ and common difference $4$.", "solution": "$39$"}
+{"problem": "A complex number $z=x+yi$ moves on the complex plane satisfying $(x-1)^2+y^2=4$ (where $z\\ne 0$). Let $w=\\frac{1}{\\bar z}$. Find the maximum value of $\\operatorname{Re}(w)$.", "solution": "$\\frac{1}{3}$"}
+{"problem": "Solve the following equation. $(x - 2)^2 = 9$", "solution": "$x = -1, 5$"}
+{"problem": "$\\lim_{x \\to 2} \\frac{x^{3} - 8}{x - 2}$", "solution": "$12$ "}
+{"problem": "Find $\\lim_{x \\to 0} \\frac{\\sin x}{x}$.", "solution": "$1$"}
+{"problem": "When rolling two dice simultaneously, find the probability that the sum of the numbers is a prime number.", "solution": "$\\frac{5}{12}$"}
+{"problem": "When the line $2x - 3y = 6$ and the line $ax + 4y = 12$ are perpendicular, find the value of $a$.", "solution": "6"}
+{"problem": "Find the expected value $E(X)$ of a random variable $X$ that follows a binomial distribution $B(100, 0.4)$.", "solution": "$40$"}
+{"problem": "When 7 is subtracted from 3 times a certain number $x$, it equals twice the sum of $x$ and 5. Find the value of $x$.", "solution": "$x = 17$"}
+{"problem": "For the function $y = -x^2$, when the domain of $x$ is $-2 \\leq x \\leq 3$, find the range of $y$.", "solution": "$-9 \\leq y \\leq 0$"}
+{"problem": "For $0 \\leqq \\theta < \\pi$, find the range of $\\theta$ that satisfies $\\tan\\theta \\geqq 1$.", "solution": "$\\frac{\\pi}{4} \\leqq \\theta < \\frac{\\pi}{2}$"}
+{"problem": "When drawing 2 balls simultaneously from a bag containing 4 white balls and 3 black balls, find the probability that both balls are white.", "solution": "$\\frac{2}{7}$"}
+{"problem": "When arranging the $5$ letters $A$, $B$, $C$, $D$, $E$ in a line, find the probability that $A$ and $B$ are adjacent.", "solution": "$\\frac{2}{5}$"}
+{"problem": "Solve the following system of equations. $\\begin{cases} 3x + 2y = 16 \\\\ x - y = 2 \\end{cases}$", "solution": "$x = 4, y = 2$"}
+{"problem": "$$x^{2} + 5x - 24$$", "solution": "$(x + 8)(x - 3)$"}
+{"problem": "Expand $(2x - 3y)(4x^2 + 6xy + 9y^2)$.", "solution": "$8x^3 - 27y^3$"}
+{"problem": "When the quadratic function $y = x^2 + ax + b$ has a minimum value of $-2$ at $x = 1$, find the values of $a$ and $b$.", "solution": "$a = -2, b = -1$"}
+{"problem": "Find the common ratio of the geometric sequence whose third term is 12 and sixth term is $-96$ (the common ratio is negative).", "solution": "$-2$"}
+{"problem": "Using $\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}$, find $\\sum_{k=1}^{20} k$.", "solution": "$210$"}
+{"problem": "Find $x$ that satisfies $2^x = 8$.", "solution": "$x = 3$"}
+{"problem": "For a random variable $X\\sim N(0,1)$, find $P(0\\le X\\le 1.2)$ to four decimal places.", "solution": "$0.3849$"}
+{"problem": "Find the sum $S=1^{3}(n-1)+2^{3}(n-2)+\\cdots+(n-1)^{3}\\cdot 1$.", "solution": "$\\frac{n(n-1)(n+1)(3n^{2}-2)}{60}$"}
+{"problem": "Calculate the following.\n\n$(-3) \\times 4 - (-2)^3 \\div 4$", "solution": "$-10$"}
+{"problem": "Find $\\int (3x^2 - 2x + 1) dx$.", "solution": "$x^3 - x^2 + x + C$"}
+{"problem": "$(x - 2)^{2} - 5(x - 2) - 14 = 0$", "solution": "$x = 0, 9$"}
+{"problem": "Solve the system of inequalities $\\begin{cases} 2x - 1 < 5 \\\\ x + 3 \\geq 0 \\end{cases}$.", "solution": "$-3 \\leq x < 3$"}
+{"problem": "If $f(x)=(ax+b)\\sin kx$ satisfies $f'(0)=-3k$, find $b$.", "solution": "$b=-3$"}
+{"problem": "$x^{3} + 64$", "solution": "$(x + 4)(x^{2} - 4x + 16)$"}
+{"problem": "When the intersection point of the line $y = 3x + k$ and the line $2x - y = 6$ has coordinates $(2,-2)$, find the value of $k$.", "solution": "-8"}
+{"problem": "When $x = 1$, find the range of $y$.", "solution": "$0 \\leq y \\leq 18$"}
+{"problem": "If we draw 100 lottery tickets with a winning probability of $0.3$, and $X$ represents the number of winning tickets, find $\\sigma(X)$.", "solution": "$\\sqrt{21}$"}
+{"problem": "Simplify the following expression.\n\n$\\frac{3x + 2}{4} - \\frac{x - 1}{3}$", "solution": "$\\frac{5x + 10}{12}$"}
+{"problem": "Express the complex number $z = 1 + i$ in polar form.", "solution": "$\\sqrt{2}\\left(\\cos \\frac{\\pi}{4} + i \\sin \\frac{\\pi}{4}\\right)$"}
+{"problem": "Find the general term of the geometric sequence with first term 3 and fourth term 24.", "solution": "$a_n=3\\cdot 2^{,n-1}$"}
+{"problem": "Calculate the following. $\\sqrt{27} \\times \\sqrt{3}$", "solution": "$9$"}

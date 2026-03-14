@@ -1,0 +1,20 @@
+{"problem": "A random variable $X$ takes values $0,1,2$ with probabilities $\\frac12,\\frac13,\\frac16$ respectively. Find $\\sigma(X)$.", "solution": "$\\frac{\\sqrt5}{3}$"}
+{"problem": "Find $\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$.", "solution": "$2$"}
+{"problem": "$$\\sqrt{18} \\times \\sqrt{6}$$", "solution": "$6\\sqrt{3}$"}
+{"problem": "Find one pair of integer solutions that satisfies $3x + 5y = 1$.", "solution": "$x = 2, y = -1$ (other solutions are also acceptable)"}
+{"problem": "Find the angle $\\theta$ ($0\\le\\theta\\le\\pi$) between vectors $\\vec a=(1,1)$ and $\\vec b=(2,0)$.", "solution": "$\\frac{\\pi}{4}$"}
+{"problem": "$$3b\\left( 4a + 5b \\right)$$", "solution": "$12ab + 15b^{2}$"}
+{"problem": "Using $\\sin^2 \\theta + \\cos^2 \\theta = 1$, when $\\sin \\theta = \\frac{3}{5}$ (where $0 < \\theta < \\frac{\\pi}{2}$), find $\\cos \\theta$.", "solution": "$\\frac{4}{5}$"}
+{"problem": "Find the value of $\\log_2 32$.", "solution": "$5$"}
+{"problem": "Find the maximum value of the function $y = -x^2 + 6x - 5$.", "solution": "$4$"}
+{"problem": "Find the equation of the quadratic function that is tangent to the $x$-axis at a point whose $x$-coordinate is 3, and passes through the point $(1, 8)$.", "solution": "$y = 2(x - 3)^{2}$"}
+{"problem": "When $\\vec{a} = (1, 2)$ and $\\vec{b} = (3, -1)$, find the dot product $\\vec{a} \\cdot \\vec{b}$.", "solution": "$1$"}
+{"problem": "Find all pairs of natural numbers $(x, y)$ that satisfy the equation $xy - 3x - 2y = 0$.", "solution": "$(x, y) = (3, 9), (4, 6), (5, 5), (8, 4)$"}
+{"problem": "Simplify $\\left(3^{\\frac12}+3^{-\\frac12}\\right)^2$.", "solution": "$\\frac{16}{3}$"}
+{"problem": "When the intersection point of the two lines 3x + y = 7 and ax - 2y = 4 is (1, 4), find the value of a.", "solution": "12"}
+{"problem": "Solve the following equation.\n\n$\\frac{2x - 1}{3} = \\frac{x + 2}{2}$", "solution": "$x = 8$"}
+{"problem": "Factorize the following expression. $6x^2 + 7x - 3$", "solution": "$(2x + 3)(3x - 1)$"}
+{"problem": "A certain solution is made by mixing a 4% concentration solution with an 8% concentration solution to make 150 mL of a 6% concentration solution. How many mL of the 4% solution is needed?", "solution": "75"}
+{"problem": "Find the range of $k$ such that the quadratic equation $x^2 - 5x + k = 0$ has two distinct real solutions.", "solution": "$k < \\frac{25}{4}$"}
+{"problem": "Expand the following expression. $(x + 4)(x - 3)$", "solution": "$x^2 + x - 12$"}
+{"problem": "When the tens digit and ones digit of a certain integer are swapped, the resulting number is 27 less than the original integer. Find the original integer.", "solution": "$74$"}

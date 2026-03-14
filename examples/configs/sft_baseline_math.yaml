@@ -1,0 +1,195 @@
+# SFT Configuration for baseline-model-instruct (8.6B Llama) on Math CoT Data
+# Hardware: 1 node x 8 H100 GPUs
+# Data: ft-llm-team-mkj/cot-gsm8k-stackmath-merge (OpenAI chat format with <think> CoT)
+#
+# Usage (override model_name per variant):
+#   python examples/run_sft.py --config examples/configs/sft_baseline_math.yaml \
+#     ++policy.model_name=ft-llm-team-mkj/baseline-model-instruct-8k-yarn \
+#     ++checkpointing.checkpoint_dir=results/sft_baseline_8k \
+#     ++logger.wandb.name=baseline-8k-sft-math
+
+sft:
+  max_num_epochs: 3
+  max_num_steps: 1000000  # effectively unlimited; epochs control training length
+
+  val_period: 100
+  val_batches: 8
+  val_global_batch_size: 16
+  val_micro_batch_size: 1
+  val_at_start: true
+  seed: 42
+
+checkpointing:
+  enabled: true
+  checkpoint_dir: "results/sft_baseline_math"
+  metric_name: "val:val_loss"
+  higher_is_better: false
+  keep_top_k: 3
+  save_period: 100
+  checkpoint_must_save_by: null
+
+policy:
+  model_name: "ft-llm-team-mkj/baseline-model-instruct-8k-yarn"
+  tokenizer:
+    name: ${policy.model_name}
+    chat_template_kwargs: null
+  train_global_batch_size: 32
+  train_micro_batch_size: 1
+  max_total_sequence_length: 8192
+  precision: "bfloat16"
+
+  offload_optimizer_for_logprob: false
+
+  dtensor_cfg:
+    _v2: true
+    enabled: true
+    env_vars: {}
+    cpu_offload: False
+    sequence_parallel: false
+    activation_checkpointing: true
+    tensor_parallel_size: 2
+    context_parallel_size: 1
+    custom_parallel_plan: null
+
+    lora_cfg:
+      enabled: False
+      target_modules: []
+      exclude_modules: []
+      match_all_linear: true
+      dim: 8
+      alpha: 32
+      dropout: 0.0
+      dropout_position: "post"
+      lora_A_init: "xavier"
+      use_triton: true
+
+  dynamic_batching:
+    enabled: false
+    train_mb_tokens: ${mul:${policy.max_total_sequence_length}, ${policy.train_micro_batch_size}}
+    sequence_length_round: 64
+
+  sequence_packing:
+    enabled: True
+    train_mb_tokens: ${mul:${policy.max_total_sequence_length}, ${policy.train_micro_batch_size}}
+    algorithm: "modified_first_fit_decreasing"
+    sequence_length_round: 64
+
+  make_sequence_length_divisible_by: ${policy.dtensor_cfg.tensor_parallel_size}
+  max_grad_norm: 1.0
+
+  optimizer:
+    name: "torch.optim.AdamW"
+    kwargs:
+      lr: 2.0e-5
+      weight_decay: 0.1
+      betas: [0.9, 0.98]
+      eps: 1e-5
+      foreach: False
+      fused: False
+
+  megatron_cfg:
+    enabled: false
+    env_vars: {}
+    empty_unused_memory_level: 1
+    activation_checkpointing: false
+    tensor_model_parallel_size: 1
+    expert_tensor_parallel_size: 1
+    expert_model_parallel_size: 1
+    pipeline_model_parallel_size: 1
+    context_parallel_size: 1
+    pipeline_dtype: ${policy.precision}
+    num_layers_in_first_pipeline_stage: null
+    num_layers_in_last_pipeline_stage: null
+    sequence_parallel: false
+    freeze_moe_router: false
+    moe_router_dtype: null
+    moe_router_load_balancing_type: "aux_loss"
+    moe_router_bias_update_rate: 1e-3
+    moe_permute_fusion: false
+    apply_rope_fusion: True
+    bias_activation_fusion: True
+    defer_fp32_logits: False
+    moe_per_layer_logging: False
+
+    optimizer:
+      optimizer: "adam"
+      lr: 2.0e-5
+      min_lr: 2.0e-6
+      weight_decay: 0.1
+      bf16: true
+      fp16: false
+      params_dtype: "float32"
+      adam_beta1: 0.9
+      adam_beta2: 0.98
+      adam_eps: 1e-5
+      sgd_momentum: 0.9
+      use_distributed_optimizer: true
+      use_precision_aware_optimizer: true
+      clip_grad: ${policy.max_grad_norm}
+      optimizer_cpu_offload: false
+      optimizer_offload_fraction: 0.0
+
+    scheduler:
+      start_weight_decay: ${policy.megatron_cfg.optimizer.weight_decay}
+      end_weight_decay: ${policy.megatron_cfg.optimizer.weight_decay}
+      weight_decay_incr_style: "constant"
+      lr_decay_style: "constant"
+      lr_decay_iters: 1000
+      lr_warmup_iters: 50
+      lr_warmup_init: 2.0e-6
+
+    distributed_data_parallel_config:
+      grad_reduce_in_fp32: false
+      overlap_grad_reduce: true
+      overlap_param_gather: true
+      data_parallel_sharding_strategy: "optim_grads_params"
+      use_custom_fsdp: false
+
+data:
+  max_input_seq_length: ${policy.max_total_sequence_length}
+  add_bos: true
+  add_eos: true
+  add_generation_prompt: false
+  shuffle: true
+  num_workers: 1
+
+  dataset_name: "openai_format"
+  train_data_path: "data/math_sft_train.jsonl"
+  val_data_path: "data/math_sft_val.jsonl"
+  chat_key: "messages"
+  system_key: null
+  system_prompt: null
+  tool_key: "tools"
+  use_preserving_dataset: false
+
+  prompt_file: null
+  split: null
+  output_key: null
+  seed: null
+
+logger:
+  log_dir: "logs"
+  wandb_enabled: true
+  tensorboard_enabled: true
+  mlflow_enabled: false
+  swanlab_enabled: false
+  monitor_gpus: true
+  wandb:
+    entity: "pjt-toe"
+    project: "baseline-sft-math"
+    name: "baseline-sft-math"
+  swanlab:
+    project: "baseline-sft-math"
+    name: "baseline-sft-math"
+  tensorboard:
+    log_dir: "tb_logs-sft-baseline-math"
+  mlflow:
+    experiment_name: "baseline-sft-math"
+    run_name: "baseline-sft-math"
+  gpu_monitoring:
+    collection_interval: 10
+    flush_interval: 10
+
+cluster:
+  gpus_per_node: 8
+  num_nodes: 1

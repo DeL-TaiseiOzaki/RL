@@ -66,6 +66,7 @@ from nemo_rl.algorithms.interfaces import LossFunction, LossType
 from nemo_rl.algorithms.loss_functions import SequencePackingLossWrapper
 from nemo_rl.distributed.batched_data_dict import BatchedDataDict
 from nemo_rl.distributed.model_utils import (
+    _CastToBf16NoGradUpcast,
     allgather_cp_sharded_tensor,
     distributed_vocab_topk,
     get_logprobs_from_vocab_parallel_logits,
@@ -678,9 +679,9 @@ class DTensorPolicyWorkerV2(AbstractPolicyWorker, ColocatablePolicyInterface):
                                 ],  # flash attention 2 expects flattened input
                                 padding_value=self.tokenizer.eos_token_id,
                                 return_attention_mask=False,
-                                min_seq_len=self.cfg["sequence_packing"][
-                                    "train_mb_tokens"
-                                ],  # TODO: this is a WAR for sequence packing, we should fix this. Without this, backward will fail when TP is enabled.
+                                min_seq_len=self.cfg.get(
+                                    "make_sequence_length_divisible_by", 1
+                                ),
                             )
                             seq_len = input_ids.shape[1]
                             attention_mask = None
@@ -823,6 +824,16 @@ class DTensorPolicyWorkerV2(AbstractPolicyWorker, ColocatablePolicyInterface):
                                     placements=[Shard(sequence_dim), Shard(-1)],
                                 )
 
+                        # Cast logits to bf16 to halve the memory footprint
+                        # of the logits tensor and its gradient during backward.
+                        # The model's lm_head outputs float32 logits (~12.9 GiB
+                        # for 32k tokens with vocab_local=98304).  Casting to
+                        # bf16 via _CastToBf16NoGradUpcast avoids allocating a
+                        # float32 gradient in backward, keeping the gradient in
+                        # bf16 (~6.4 GiB) which fits in available GPU memory.
+                        if logits.dtype != torch.bfloat16:
+                            logits = _CastToBf16NoGradUpcast.apply(logits)
+
                         if self.enable_seq_packing:
                             loss_fn_ = SequencePackingLossWrapper(
                                 loss_fn=loss_fn,
@@ -862,6 +873,10 @@ class DTensorPolicyWorkerV2(AbstractPolicyWorker, ColocatablePolicyInterface):
                             # when FSDP reduces the gradients over the DP dim, they're automatically averaged
                             # but we want to sum them so we cancel out the average here
                             loss *= self.dp_size * self.cp_size
+                            # Release cached but unused memory blocks back to
+                            # CUDA so the allocator can satisfy large contiguous
+                            # requests (e.g. logits gradient) during backward.
+                            torch.cuda.empty_cache()
                             loss.backward()
 
                     if num_valid_samples > 0:

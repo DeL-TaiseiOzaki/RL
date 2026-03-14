@@ -56,6 +56,26 @@ def _compute_distributed_log_softmax(
     return vocab_parallel_logits - sum_exp_logits.log_().to(vocab_parallel_logits.dtype)
 
 
+class _CastToBf16NoGradUpcast(torch.autograd.Function):
+    """Cast a tensor to bf16 in forward; pass gradient through as-is in backward.
+
+    Unlike a regular `tensor.to(bfloat16)`, the backward does NOT allocate a
+    float32 gradient for the input.  This avoids a ~12 GiB peak allocation
+    when the input is the full float32 logits tensor produced by the model's
+    lm_head.  The upstream backward (`.float()` inside the model) receives a
+    bf16 gradient and casts it to bf16 (no-op), so numerical behavior is
+    unchanged.
+    """
+
+    @staticmethod
+    def forward(ctx: Any, x: torch.Tensor) -> torch.Tensor:
+        return x.to(torch.bfloat16)
+
+    @staticmethod
+    def backward(ctx: Any, grad: torch.Tensor) -> torch.Tensor:
+        return grad
+
+
 class DistributedLogprob(torch.autograd.Function):
     """Custom autograd function for computing log probabilities in a distributed setting.
 
@@ -77,6 +97,7 @@ class DistributedLogprob(torch.autograd.Function):
         masked_target = target - vocab_start_index
         masked_target[target_mask] = 0
 
+        orig_dtype = vocab_parallel_logits.dtype
         vocab_parallel_logits = vocab_parallel_logits.to(dtype=torch.float32)
 
         log_probs = _compute_distributed_log_softmax(vocab_parallel_logits, group=group)
@@ -94,6 +115,7 @@ class DistributedLogprob(torch.autograd.Function):
         if not inference_only:
             # only save for backward when we have inference only=False
             ctx.save_for_backward(softmax_output, target_mask, masked_target)
+            ctx.orig_dtype = orig_dtype
 
         return log_probs
 
@@ -135,6 +157,15 @@ class DistributedLogprob(torch.autograd.Function):
             )
             grad_input = is_chosen.float().sub_(softmax)
             grad_input.mul_(grad_output.unsqueeze(-1))
+
+        # Cast gradient back to the original logits dtype (e.g. bf16) to prevent
+        # the accumulated logits gradient tensor from being allocated in float32.
+        # With SequencePackingLossWrapper processing sequences individually, autograd
+        # allocates a single gradient tensor for the full packed logits in the dtype
+        # of the first incoming gradient.  Keeping it float32 causes OOM for long
+        # packed sequences (e.g. 32k tokens × vocab_local × 4 bytes ≈ 12 GiB).
+        if hasattr(ctx, "orig_dtype") and ctx.orig_dtype != grad_input.dtype:
+            grad_input = grad_input.to(ctx.orig_dtype)
 
         # if you add an argument to the forward method, then you must add a corresponding None here
         return grad_input, None, None, None, None, None, None
@@ -199,10 +230,19 @@ class ChunkedDistributedLogprob(torch.autograd.Function):
         log_probs = torch.cat(all_log_probs, dim=1)
 
         if not inference_only:
-            # only save for backward when we have inference only=False
-            ctx.save_for_backward(vocab_parallel_logits, target_mask, masked_target)
+            # Save logits in bf16 to halve the memory footprint of saved
+            # tensors. The model's lm_head outputs float32 logits, and
+            # SequencePackingLossWrapper calls this function per-sequence,
+            # accumulating saved tensors for ~32k total tokens.  Storing
+            # them in float32 costs ~12.9 GiB; bf16 costs ~6.4 GiB.
+            # Backward casts back to float32 per-chunk for softmax precision.
+            logits_to_save = vocab_parallel_logits
+            if logits_to_save.dtype != torch.bfloat16:
+                logits_to_save = logits_to_save.to(torch.bfloat16)
+            ctx.save_for_backward(logits_to_save, target_mask, masked_target)
             ctx.chunk_size = chunk_size
             ctx.tp_group = tp_group
+            ctx.orig_dtype = vocab_parallel_logits.dtype
 
         return log_probs
 
@@ -250,6 +290,10 @@ class ChunkedDistributedLogprob(torch.autograd.Function):
             all_grad_input.append(grad_input)
 
         grad_input = torch.cat(all_grad_input, dim=1)
+
+        # Cast gradient back to the original logits dtype (see DistributedLogprob)
+        if hasattr(ctx, "orig_dtype") and ctx.orig_dtype != grad_input.dtype:
+            grad_input = grad_input.to(ctx.orig_dtype)
 
         # if you add an argument to the forward method, then you must add a corresponding None here
         return grad_input, None, None, None, None, None, None
@@ -786,6 +830,10 @@ def get_logprobs_from_vocab_parallel_logits(
     This function takes logits that are sharded across the vocabulary dimension (tensor parallel)
     and computes the log probabilities for the given input IDs.
 
+    When chunk_size is not provided and gradients are enabled, automatically determines a
+    chunk_size to prevent OOM during the backward pass of DistributedLogprob, which needs
+    to hold both the saved softmax output and the gradient input simultaneously.
+
     Args:
         vocab_parallel_logits (DTensor): Logits distributed across tensor parallel workers,
             with shape [batch_size, seq_len, vocab_size/tp_size].
@@ -812,6 +860,19 @@ def get_logprobs_from_vocab_parallel_logits(
     tp_size = tp_group.size()
 
     vocab_interval_per_rank = vocab_parallel_logits.shape[-1] // tp_size
+
+    # Always use ChunkedDistributedLogprob during training.
+    # DistributedLogprob saves float32 softmax_output per forward call via
+    # ctx.save_for_backward(). When SequencePackingLossWrapper processes
+    # packed sequences individually (~16 calls per micro-batch), the
+    # accumulated saved tensors total ~seq_total * vocab_local * 4 bytes
+    # (e.g. 32768 * 98304 * 4 ≈ 12.9 GiB), exhausting GPU memory before
+    # backward even begins. ChunkedDistributedLogprob instead saves bf16
+    # logits (views of existing tensors, ~0 extra memory) and recomputes
+    # softmax per chunk during backward.
+    if chunk_size is None and torch.is_grad_enabled():
+        seq_len = vocab_parallel_logits.shape[1]
+        chunk_size = seq_len  # Force chunked path for all training calls
 
     return dtensor_from_parallel_logits_to_logprobs(
         vocab_parallel_logits.to_local(),

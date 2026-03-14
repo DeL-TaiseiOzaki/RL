@@ -237,12 +237,11 @@ class ClippedPGLossFn(LossFunction):
             global_normalization_factor=global_valid_toks,
         ).item()
 
-        next_token_logits = next_token_logits.to(torch.float32)
-
         if vocab_parallel_group is not None:
             assert vocab_parallel_rank is not None, (
                 "vocab_parallel_rank must be provided when vocab_parallel_group is provided"
             )
+            next_token_logits = next_token_logits.to(torch.float32)
             curr_logprobs = from_parallel_logits_to_logprobs(
                 next_token_logits,
                 data["input_ids"],
@@ -255,10 +254,15 @@ class ClippedPGLossFn(LossFunction):
             # slice off to the correct length to remove potential CP padding
             curr_logprobs = curr_logprobs[:, : data["input_ids"].shape[1] - 1]
         elif isinstance(next_token_logits, torch.distributed.tensor.DTensor):
+            # Keep original dtype (bf16) — ChunkedDistributedLogprob casts to
+            # float32 per-chunk internally, avoiding a full float32 copy that
+            # would exhaust GPU memory when SequencePackingLossWrapper
+            # accumulates saved tensors across many per-sequence calls.
             curr_logprobs = get_logprobs_from_vocab_parallel_logits(
                 next_token_logits, data["input_ids"], seq_index=seq_index
             )
         else:
+            next_token_logits = next_token_logits.to(torch.float32)
             next_token_logits_wo_last = next_token_logits[
                 :, :-1
             ]  # Remove last position's logits

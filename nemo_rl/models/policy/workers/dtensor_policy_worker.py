@@ -640,9 +640,9 @@ class DTensorPolicyWorker(AbstractPolicyWorker, ColocatablePolicyInterface):
                                 ],  # flash attention 2 expects flattened input
                                 padding_value=self.tokenizer.eos_token_id,
                                 return_attention_mask=False,
-                                min_seq_len=self.cfg["sequence_packing"][
-                                    "train_mb_tokens"
-                                ],  # TODO: this is a WAR for sequence packing, we should fix this. Without this, backward will fail when TP is enabled.
+                                min_seq_len=self.cfg.get(
+                                    "make_sequence_length_divisible_by", 1
+                                ),
                             )
                             seq_len = input_ids.shape[1]
                             attention_mask = None
